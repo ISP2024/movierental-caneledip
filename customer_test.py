@@ -14,6 +14,7 @@ class CustomerTest(unittest.TestCase):
 		movies = list of some movies
 		"""
 		self.c = Customer("Movie Mogul")
+		self.b = Customer("Tester testing")
 		self.new_movie = Movie("Mulan", Movie.NEW_RELEASE)
 		self.regular_movie = Movie("CitizenFour", Movie.REGULAR)
 		self.childrens_movie = Movie("Frozen", Movie.CHILDRENS)
@@ -38,4 +39,9 @@ class CustomerTest(unittest.TestCase):
 		self.assertEqual("12.00", matches[1])
 
 	def test_total_amount(self):
-		pass
+		self.assertEqual(0, self.c.total_amount())
+		self.c.add_rental(Rental(self.childrens_movie, 4))
+		self.c.add_rental(Rental(self.regular_movie, 4))
+		self.assertEqual(8.0, self.c.total_amount())
+		self.c.add_rental(Rental(self.new_movie, 4))
+		self.assertEqual(20.0, self.c.total_amount())
