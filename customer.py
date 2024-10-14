@@ -43,11 +43,11 @@ class Customer:
         
         for rental in self.rentals:
             # compute the frequent renter points based on movie price code
-            rental.rental_points(frequent_renter_points, rental)
+            rental.rental_points(frequent_renter_points)
             #  add a detail line to statement
             statement += rental_fmt.format(
-                            rental.get_movie().get_title(), 
-                            rental.get_days_rented(), 
+                            rental.get_movie().get_title(),
+                            rental.get_days_rented(),
                             rental.get_price())
             # and accumulate activity
             total_amount += rental.get_price()
