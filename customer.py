@@ -41,6 +41,16 @@ class Customer:
         statement += header_fmt.format("Movie Title", "  Days", " Price")
         rental_fmt = "{:40s}  {:6d} {:6.2f}\n"
         
+
+        # footer: summary of charges
+        statement += "\n"
+        statement += "{:40s}  {:6s} {:6.2f}\n".format(
+                       "Total Charges", "", self.total_amount(total_amount, frequent_renter_points, statement, rental_fmt))
+        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
+
+        return statement
+
+    def total_amount(self, total_amount, frequent_renter_points, statement, rental_fmt):
         for rental in self.rentals:
             # compute the frequent renter points based on movie price code
             rental.rental_points(frequent_renter_points)
@@ -51,11 +61,4 @@ class Customer:
                             rental.get_price())
             # and accumulate activity
             total_amount += rental.get_price()
-
-        # footer: summary of charges
-        statement += "\n"
-        statement += "{:40s}  {:6s} {:6.2f}\n".format(
-                       "Total Charges", "", total_amount)
-        statement += "Frequent Renter Points earned: {}\n".format(frequent_renter_points)
-
-        return statement
+        return total_amount
