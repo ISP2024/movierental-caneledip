@@ -1,6 +1,7 @@
 from movie import Movie
 from enum import Enum
 from price import *
+from datetime import datetime
 
 
 class Rental:
@@ -17,6 +18,16 @@ class Rental:
 		NEW_RELEASE = NewReleasePrice()
 		REGULAR = RegularPrice()
 		CHILDREN = ChildrenPrice()
+
+		@classmethod
+		def price_code_for_movie(cls, movie: Movie):
+			"""Determine a price code for movie, according to the year it released."""
+			if 0 <= abs(datetime.year - movie.year) <= 1:
+				 return NewReleasePrice()
+			if movie.is_genre("Children") or movie.is_genre("Childrens"):
+				 return ChildrenPrice()
+			return RegularPrice()
+
 
 
 		def __init__(self, movie, days_rented, price_code: PriceStrategy):
@@ -35,7 +46,7 @@ class Rental:
 		
 		def get_price_code(self):
 			# get the price code
-			return self.price_code.value
+			return self.price_code_for_movie()
 
 		def get_price(self):
 			return self.get_price_code().get_price(self.days_rented)
