@@ -59,10 +59,10 @@ class MovieCatalog():
                         self.movie_catalog.append(Movie(title=title, year=year, genres=genres))
                     except (ValueError, IndexError) as e:
                         log = logging.getLogger()
-                        log.error(f"Error occured when processing row {row} - {e}.")
+                        log.error(f"Line {row}: Unrecognized format {e}.")
         except FileNotFoundError:
             log = logging.getLogger()
-            log.error("Movies CSV file not found.")
+            log.error("Catalog file not found.")
 
     def get_movie(self, title: str, year: int = None) -> Movie:
         """Return the first movie matching the title (and optional year)."""
