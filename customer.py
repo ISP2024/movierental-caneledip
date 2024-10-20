@@ -58,7 +58,7 @@ class Customer:
     def get_rental_points(self):
         frequent_renter_points = 0
         for rental in self.rentals:
-            frequent_renter_points += rental.rental_points()
+            frequent_renter_points += rental.get_rental_points()
         return frequent_renter_points
 
     def total_amount(self):

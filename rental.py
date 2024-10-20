@@ -22,7 +22,7 @@ class Rental:
 		@classmethod
 		def price_code_for_movie(cls, movie: Movie):
 			"""Determine a price code for movie, according to the year it released."""
-			if 0 <= abs(datetime.year - movie.year) <= 1:
+			if 0 <= abs(datetime.now().year - movie.year) <= 1:
 				 return NewReleasePrice()
 			if movie.is_genre("Children") or movie.is_genre("Childrens"):
 				 return ChildrenPrice()
@@ -46,18 +46,10 @@ class Rental:
 		
 		def get_price_code(self):
 			# get the price code
-			return self.price_code_for_movie()
+			return self.price_code_for_movie(self.movie)
 
 		def get_price(self):
 			return self.get_price_code().get_price(self.days_rented)
 
 		def get_rental_points(self):
 			return self.get_price_code().get_rental_points(self.days_rented)
-
-		# def rental_points(self):
-		#     if self.get_movie().movie_type.category == "new_release":
-		#             # New release earns 1 point per day rented
-		#         return self.get_days_rented()
-		#     else:
-		#             # Other rentals get only 1 point
-		#         return 1

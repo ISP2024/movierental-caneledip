@@ -18,7 +18,7 @@ class Movie:
     def is_genre(self, other_genre: str):
         """Give a boolean if the string match any movie's genre."""
         for genre in self.genres:
-            if genre.lower_case() == other_genre.lower_case():
+            if genre.lower() == other_genre.lower():
                 return True
         return False
 
@@ -34,16 +34,15 @@ class MovieCatalog():
     """A catalog of movies from a csv file."""
     _instance = None
 
-    @classmethod
     def __new__(cls):
         if cls._instance is None:
             cls._instance = super(MovieCatalog, cls).__new__(cls)
-            cls._instance.movie_catalog = []
-            cls._instance.add_file_movies()
         return cls._instance
-    
+
     def __init__(self):
-        self.movie_catalog = []
+        if not hasattr(self, 'movie_catalog'):  # Check if already initialized
+            self.movie_catalog = []
+            self.add_file_movies()
 
     def add_file_movies(self) -> None:
         """Load movies from CSV and store them as Movie objects."""

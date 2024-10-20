@@ -54,6 +54,6 @@ class NewReleasePrice(PriceStrategy):
         """New release price is 3 for each  days."""
         return days*3
 
-    def get_rental_points(self, days):
+    def get_rental_points(self, days: int):
         """New release movie give 1 point per days of rental."""
         return days
