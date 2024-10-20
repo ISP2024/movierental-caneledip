@@ -17,7 +17,10 @@ class Movie:
 
     def is_genre(self, other_genre: str):
         """Give a boolean if the string match any movie's genre."""
-        return self.genre.lower_case() == other_genre.lower_case()
+        for genre in self.genres:
+            if genre.lower_case() == other_genre.lower_case():
+                return True
+        return False
 
     def get_title(self):
         """Give a title of a movie."""
