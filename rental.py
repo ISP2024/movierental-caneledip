@@ -19,7 +19,7 @@ class Rental:
 		CHILDREN = ChildrenPrice()
 
 
-		def __init__(self, movie, days_rented, price_code: PriceStrategy): 
+		def __init__(self, movie, days_rented, price_code: PriceStrategy):
 			"""Initialize a new movie rental object for
 				 a movie with known rental period (daysRented).
 			"""
